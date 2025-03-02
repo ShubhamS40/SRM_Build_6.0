@@ -20,11 +20,11 @@ const FilterBased = ({ setFilters }) => {
   };
 
   return (
-    <div className="w-full md:w-64 bg-white border border-gray-200 p-4 rounded-lg shadow-md">
+    <div className="w-full md:w-64 bg-white border border-red-400 p-4 rounded-lg shadow-md">
       {/* Categories Section */}
       <div className="mb-4">
         <h3
-          className="text-lg font-bold text-gray-800 cursor-pointer flex justify-between items-center"
+          className="text-lg font-bold text-red-800 cursor-pointer flex justify-between items-center"
           onClick={() => setShowCategories(!showCategories)}
         >
           CATEGORIES
@@ -34,7 +34,7 @@ const FilterBased = ({ setFilters }) => {
           <ul className="ml-3 mt-2 text-gray-700">
             <li
               className={`cursor-pointer py-1 px-2 rounded ${
-                selectedCategory === "Rental Homes" ? "bg-blue-100 text-blue-700" : "hover:bg-gray-100"
+                selectedCategory === "Rental Homes" ? "bg-red-100 text-red-700" : "hover:bg-red-50"
               }`}
               onClick={() => setSelectedCategory("Rental Homes")}
             >
@@ -42,7 +42,7 @@ const FilterBased = ({ setFilters }) => {
             </li>
             <li
               className={`cursor-pointer py-1 px-2 rounded ${
-                selectedCategory === "Home Appliances" ? "bg-blue-100 text-blue-700" : "hover:bg-gray-100"
+                selectedCategory === "Home Appliances" ? "bg-red-100 text-red-700" : "hover:bg-red-50"
               }`}
               onClick={() => setSelectedCategory("Home Appliances")}
             >
@@ -55,7 +55,7 @@ const FilterBased = ({ setFilters }) => {
       {/* Locations Section */}
       <div className="mb-4">
         <h3
-          className="text-lg font-bold text-gray-800 cursor-pointer flex justify-between items-center"
+          className="text-lg font-bold text-red-800 cursor-pointer flex justify-between items-center"
           onClick={() => setShowLocations(!showLocations)}
         >
           LOCATIONS
@@ -65,7 +65,7 @@ const FilterBased = ({ setFilters }) => {
           <ul className="ml-3 mt-2 text-gray-700">
             <li
               className={`cursor-pointer py-1 px-2 rounded ${
-                selectedLocation === "New York" ? "bg-blue-100 text-blue-700" : "hover:bg-gray-100"
+                selectedLocation === "New York" ? "bg-red-100 text-red-700" : "hover:bg-red-50"
               }`}
               onClick={() => setSelectedLocation("New York")}
             >
@@ -73,7 +73,7 @@ const FilterBased = ({ setFilters }) => {
             </li>
             <li
               className={`cursor-pointer py-1 px-2 rounded ${
-                selectedLocation === "Brooklyn" ? "bg-blue-100 text-blue-700" : "hover:bg-gray-100"
+                selectedLocation === "Brooklyn" ? "bg-red-100 text-red-700" : "hover:bg-red-50"
               }`}
               onClick={() => setSelectedLocation("Brooklyn")}
             >
@@ -85,11 +85,11 @@ const FilterBased = ({ setFilters }) => {
 
       {/* Price Filter */}
       <div className="mb-4">
-        <h3 className="text-lg font-bold text-gray-800">PRICE</h3>
+        <h3 className="text-lg font-bold text-red-800">PRICE</h3>
         <select
           value={selectedPrice}
           onChange={(e) => setSelectedPrice(e.target.value)}
-          className="w-full p-2 border rounded-md mt-2"
+          className="w-full p-2 border border-red-400 rounded-md mt-2"
         >
           <option value="">Any</option>
           <option value="Under $1000">Under $1000</option>
@@ -99,11 +99,11 @@ const FilterBased = ({ setFilters }) => {
 
       {/* Bachelors Allowed */}
       <div className="mb-4">
-        <h3 className="text-lg font-bold text-gray-800">BACHELORS ALLOWED</h3>
+        <h3 className="text-lg font-bold text-red-800">BACHELORS ALLOWED</h3>
         <select
           value={bachelorsAllowed}
           onChange={(e) => setBachelorsAllowed(e.target.value)}
-          className="w-full p-2 border rounded-md mt-2"
+          className="w-full p-2 border border-red-400 rounded-md mt-2"
         >
           <option value="">Any</option>
           <option value="Yes">Yes</option>
@@ -114,7 +114,7 @@ const FilterBased = ({ setFilters }) => {
       {/* Apply Filters Button */}
       <button
         onClick={applyFilters}
-        className="w-full bg-[#5B0E2D] text-white p-2 mt-3 rounded-lg hover:bg-[#FFD700] hover:text-[#5B0E2D] transition"
+        className="w-full bg-red-700 text-white p-2 mt-3 rounded-lg hover:bg-red-500 transition"
       >
         Apply Filters
       </button>

@@ -5,27 +5,27 @@ function Categorysection() {
     const categories = [
         {
           title: 'Rental Homes',
-          link: '/rental-homes',
+          link: '/homedetail',
           icon: '🏠',
         },
         {
           title: 'Appliances',
-          link: '/appliances',
+          link: '/homedetail',
           icon: '🛒',
         },
         {
           title: 'Domestic Help',
-          link: '/domestic-help',
+          link: '/homedetail',
           icon: '🤝',
         },
         {
           title: 'Laundry',
-          link: '/laundry',
+          link: '/homedetail',
           icon: '👕',
         },
         {
           title: 'Grocery Marketplace',
-          link: '/grocery-marketplace',
+          link: '/homedetail',
           icon: '🛍️',
         },
       ];

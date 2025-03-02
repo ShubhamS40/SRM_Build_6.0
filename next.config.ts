@@ -11,6 +11,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "ui.aceternity.com",
       },
+      {
+        protocol: "https",
+        hostname: "source.unsplash.com",
+      },
     ],
     domains: ["images.unsplash.com", "ui.aceternity.com"],
   },

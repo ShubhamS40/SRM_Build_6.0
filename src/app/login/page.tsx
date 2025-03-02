@@ -1,82 +1,80 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { IconBrandGithub, IconBrandGoogle, IconBrandLinkedin } from "@tabler/icons-react";
+import { useRouter } from "next/navigation";
 
 export function LoginForm() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const router = useRouter();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Login submitted");
+    setLoading(true);
+    setError("");
+
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || "Login failed");
+
+      // Store token and user info in localStorage
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      alert("Login successful! Redirecting...");
+      router.push("/"); // Redirect to homepage
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="m-16">
       <div className="max-w-md w-full mx-auto rounded-lg p-6 shadow-lg bg-white">
-        {/* Title Section */}
         <h2 className="text-2xl font-bold text-red-500">Welcome Back!</h2>
         <p className="text-gray-700 text-sm mt-2">Sign in to continue your journey with RelocateEase.</p>
 
-        {/* Login Form */}
         <form className="my-6" onSubmit={handleSubmit}>
-          {/* Email Field */}
           <LabelInputContainer className="mb-4">
             <Label htmlFor="email">Email Address</Label>
-            <Input id="email" placeholder="john.doe@example.com" type="email" required />
+            <Input id="email" placeholder="john.doe@example.com" type="email" required onChange={handleChange} />
           </LabelInputContainer>
 
-          {/* Password Field */}
           <LabelInputContainer className="mb-6">
             <Label htmlFor="password">Password</Label>
-            <Input id="password" placeholder="••••••••" type="password" required />
+            <Input id="password" placeholder="••••••••" type="password" required onChange={handleChange} />
           </LabelInputContainer>
 
-          {/* Login Button */}
+          {error && <p className="text-red-500 text-sm">{error}</p>}
+
           <button
             className="w-full bg-red-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-600 transition flex items-center justify-center space-x-2"
             type="submit"
+            disabled={loading}
           >
-            Login →
+            {loading ? "Logging in..." : "Login →"}
           </button>
-
-          {/* Forgot Password & Signup Link */}
-          <div className="text-center mt-4">
-            <a href="/forgot-password" className="text-sm text-red-500 hover:underline">
-              Forgot Password?
-            </a>
-          </div>
-
-          {/* Divider */}
-          <div className="my-6 border-t border-gray-300 w-full"></div>
-
-          {/* Social Login */}
-          <p className="text-center text-gray-700 mb-4">Or sign in with</p>
-          <div className="flex flex-col space-y-3">
-            <SocialButton icon={<IconBrandGithub />} text="Sign in with GitHub" />
-            <SocialButton icon={<IconBrandGoogle />} text="Sign in with Google" />
-            <SocialButton icon={<IconBrandLinkedin />} text="Sign in with LinkedIn" />
-          </div>
         </form>
       </div>
     </div>
   );
 }
 
-/* Social Login Button Component */
-const SocialButton = ({ icon, text }: { icon: React.ReactNode; text: string }) => {
-  return (
-    <button
-      className="flex items-center space-x-3 w-full bg-gray-50 border border-gray-300 px-4 py-3 rounded-lg font-semibold hover:border-red-500 transition"
-      type="button"
-    >
-      {icon}
-      <span>{text}</span>
-    </button>
-  );
-};
-
-/* Input Container */
 const LabelInputContainer = ({ children, className }: { children: React.ReactNode; className?: string }) => {
   return <div className={cn("flex flex-col space-y-2 w-full", className)}>{children}</div>;
 };

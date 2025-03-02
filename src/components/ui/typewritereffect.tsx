@@ -55,7 +55,7 @@ export const TypewriterEffect = ({
                   initial={{}}
                   key={`char-${index}`}
                   className={cn(
-                    `text-white text-7xl opacity-0 hidden`,
+                    `text-white text-4xl opacity-0 hidden`,
                     word.className
                   )}
                 >

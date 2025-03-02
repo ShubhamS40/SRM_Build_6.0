@@ -48,7 +48,7 @@ const HomeDetailPage = () => {
 
       {/* Right Side - Booking Form */}
       <div className="bg-gray-100 p-6 rounded-lg shadow-md">
-        <BookingForm home={home} />
+        <BookingForm home={homesData} />
       </div>
     </div>
   );
